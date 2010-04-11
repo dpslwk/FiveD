@@ -147,9 +147,55 @@
 *
 ****************************************************************************************/
 
-#elif MOTHERBOARD == 3
+#elif MOTHERBOARD == 5  //  *** LWK ***
 
-#error The Arduino Mega is not yet implemented for the 5D GCode interpreter
+#ifndef __AVR_ATmega1280__
+#error Oops!  Make sure you have 'Arduino Mega' selected from the 'Tools -> Boards' menu.
+#endif
+
+#define DEBUG_PIN        0
+
+#define X_STEP_PIN (byte)22
+#define X_DIR_PIN (byte)23
+#define X_MIN_PIN (byte)2
+#define X_MAX_PIN (byte)3
+#define X_ENABLE_PIN (byte)24
+
+#define Y_STEP_PIN (byte)25
+#define Y_DIR_PIN (byte)26
+#define Y_MIN_PIN (byte)16
+#define Y_MAX_PIN (byte)17
+#define Y_ENABLE_PIN (byte)27
+
+#define Z_STEP_PIN (byte)28
+#define Z_DIR_PIN (byte)29
+#define Z_MIN_PIN (byte)18
+#define Z_MAX_PIN (byte)19
+#define Z_ENABLE_PIN (byte)30
+
+#define BASE_HEATER_PIN   (byte)-1
+#define POWER_SUPPLY_PIN (byte)-1
+
+//extruder pins
+#define EXTRUDER_0_MOTOR_SPEED_PIN   (byte)9
+#define EXTRUDER_0_MOTOR_DIR_PIN     (byte)32
+#define EXTRUDER_0_HEATER_PIN        (byte)8
+#define EXTRUDER_0_FAN_PIN           (byte)-1
+#define EXTRUDER_0_TEMPERATURE_PIN  (byte)4    // Analogue input
+#define EXTRUDER_0_VALVE_DIR_PIN     (byte)-1
+#define EXTRUDER_0_VALVE_ENABLE_PIN  (byte)-1  // Valve needs to be redesigned not to need this
+#define EXTRUDER_0_STEP_ENABLE_PIN  (byte)33 
+
+
+#define EXTRUDER_1_MOTOR_SPEED_PIN   (byte)-1
+#define EXTRUDER_1_MOTOR_DIR_PIN    (byte)-1
+#define EXTRUDER_1_HEATER_PIN        (byte)-1
+#define EXTRUDER_1_FAN_PIN           (byte)-1
+#define EXTRUDER_1_TEMPERATURE_PIN  (byte)3  // Analogue input
+#define EXTRUDER_1_VALVE_DIR_PIN    (byte)-1
+#define EXTRUDER_1_VALVE_ENABLE_PIN (byte)-1   // Valve needs to be redesigned not to need this 
+#define EXTRUDER_1_STEP_ENABLE_PIN  (byte)-1  // 7 - Conflicts with the fan; set -ve if no stepper
+
 
 #else
 

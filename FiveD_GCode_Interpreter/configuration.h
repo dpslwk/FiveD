@@ -3,13 +3,13 @@
 
 #define PS_INITIAL_STATE HIGH //HIGH = PSU Off at reset, LOW = PSU On at reset
 
-#define MOTHERBOARD 2 // ARDUINO 0, SANGUINO 1, RS485 2, MEGA 3
+#define MOTHERBOARD 5 // ARDUINO 0, SANGUINO 1, RS485 2, MEGA 3, LWKMEGA 5
 
-#define USE_THERMISTOR
+// #define USE_THERMISTOR
 
 #define EXTRUDER_COUNT 1
 
-#define USE_EXTRUDER_CONTROLLER true
+#define USE_EXTRUDER_CONTROLLER false
 
 #define E_STEPS_PER_MM   (2.12 * 16) // 1/16 Microstepping
 // (200 full-steps-per-revolution / (5mm diameter shaft * 3.14) / (3 mm filament / 0.5 mm nozzle) = (200 / (5 * 3.14)) / (3 / 0.5) = 2.12314225 full steps per mm extruded
@@ -28,11 +28,11 @@
 #define ENDSTOPS_MIN_ENABLED 1
 #define ENDSTOPS_MAX_ENABLED 0
 
-#define INVERT_X_DIR 0
-#define INVERT_Y_DIR 0
+#define INVERT_X_DIR 1
+#define INVERT_Y_DIR 1
 #define INVERT_Z_DIR 0
 
-//#define ACCELERATION_ON  // Comment this line to turn accelerations off
+#define ACCELERATION_ON  // Comment this line to turn accelerations off
 #define SLOW_XY_FEEDRATE 1000.0 // Speed from which to start accelerating
 #define SLOW_Z_FEEDRATE 20
 
