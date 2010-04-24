@@ -176,22 +176,37 @@
 #define BASE_HEATER_PIN   (byte)-1
 #define POWER_SUPPLY_PIN (byte)-1
 
+// SPI pins
+#define MISO 50
+#define MOSI 51
+#define SCK 52
+#define SS 53
+
 //extruder pins
 #define EXTRUDER_0_MOTOR_SPEED_PIN   (byte)9
 #define EXTRUDER_0_MOTOR_DIR_PIN     (byte)32
 #define EXTRUDER_0_HEATER_PIN        (byte)8
 #define EXTRUDER_0_FAN_PIN           (byte)-1
+#ifdef MAX6675_THERMOCOUPLE
+#define EXTRUDER_0_TEMPERATURE_PIN  (byte)49    // CS pin of MAX6675
+#else
 #define EXTRUDER_0_TEMPERATURE_PIN  (byte)4    // Analogue input
+#endif
 #define EXTRUDER_0_VALVE_DIR_PIN     (byte)-1
 #define EXTRUDER_0_VALVE_ENABLE_PIN  (byte)-1  // Valve needs to be redesigned not to need this
 #define EXTRUDER_0_STEP_ENABLE_PIN  (byte)33 
+
 
 
 #define EXTRUDER_1_MOTOR_SPEED_PIN   (byte)-1
 #define EXTRUDER_1_MOTOR_DIR_PIN    (byte)-1
 #define EXTRUDER_1_HEATER_PIN        (byte)-1
 #define EXTRUDER_1_FAN_PIN           (byte)-1
+#ifdef MAX6675_THERMOCOUPLE
+#define EXTRUDER_1_TEMPERATURE_PIN  (byte)48    // CS pin of MAX6675
+#else
 #define EXTRUDER_1_TEMPERATURE_PIN  (byte)3  // Analogue input
+#endif
 #define EXTRUDER_1_VALVE_DIR_PIN    (byte)-1
 #define EXTRUDER_1_VALVE_ENABLE_PIN (byte)-1   // Valve needs to be redesigned not to need this 
 #define EXTRUDER_1_STEP_ENABLE_PIN  (byte)-1  // 7 - Conflicts with the fan; set -ve if no stepper

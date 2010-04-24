@@ -5,7 +5,11 @@
 
 #define MOTHERBOARD 5 // ARDUINO 0, SANGUINO 1, RS485 2, MEGA 3, LWKMEGA 5
 
-// #define USE_THERMISTOR
+// Temperature measurement
+// Uncomment ONE of the next three
+//#define USE_THERMISTOR
+//#define AD595_THERMOCOUPLE
+#define MAX6675_THERMOCOUPLE 
 
 #define EXTRUDER_COUNT 1
 
@@ -16,7 +20,7 @@
 
 #define X_STEPS_PER_MM   10.047
 #define Y_STEPS_PER_MM   10.047 // 0.9deg/step
-#define Z_STEPS_PER_MM   1561.875 //1487.5 // 0.9deg/step UNC 5/16 - 18 Threads Per Inch
+#define Z_STEPS_PER_MM   208.408 //1487.5 // 0.9deg/step UNC 5/16 - 18 Threads Per Inch
 
 
 #define FAST_XY_FEEDRATE 3000.0

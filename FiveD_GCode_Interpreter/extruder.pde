@@ -114,7 +114,14 @@ extruder::extruder(byte md_pin, byte ms_pin, byte h_pin, byte f_pin, byte t_pin,
   pinMode(motor_speed_pin, OUTPUT);
   pinMode(heater_pin, OUTPUT);
 
+#ifdef MAX6675_THERMOCOUPLE
+  pinMode(MISO, INPUT);
+  pinMode(SCK, OUTPUT);
+  pinMode(temp_pin, OUTPUT); 
+  digitalWrite(temp_pin,HIGH);  // Disable MAX6675 till needed
+#else
   pinMode(temp_pin, INPUT);
+#endif
   pinMode(valve_dir_pin, OUTPUT); 
   pinMode(valve_en_pin, OUTPUT);
 
@@ -242,9 +249,54 @@ int extruder::getTemperature()
   else if (celsius < 0) celsius = 0; 
 
   return celsius;
-#else
+#endif
+
+#ifdef AD595_THERMOCOUPLE
   return ( 5.0 * sampleTemperature() * 100.0) / 1024.0;
 #endif
+
+
+/* 
+ Temperature reading function  
+ With thanks to: Ryan Mclaughlin - http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1230859336
+ for the MAX6675 code
+ */
+
+#ifdef MAX6675_THERMOCOUPLE
+  int value = 0;
+  byte error_tc;
+
+
+  digitalWrite(temp_pin, 0); // Enable device
+
+  /* Cycle the clock for dummy bit 15 */
+  digitalWrite(SCK,1);
+  digitalWrite(SCK,0);
+
+  /* Read bits 14-3 from MAX6675 for the Temp
+   	 Loop for each bit reading the value 
+   */
+  for (int i=11; i>=0; i--)
+  {
+    digitalWrite(SCK,1);  // Set Clock to HIGH
+    value += digitalRead(MISO) << i;  // Read data and add it to our variable
+    digitalWrite(SCK,0);  // Set Clock to LOW
+  }
+
+  /* Read the TC Input inp to check for TC Errors */
+  digitalWrite(SCK,1); // Set Clock to HIGH
+  error_tc = digitalRead(MISO); // Read data
+  digitalWrite(SCK,0);  // Set Clock to LOW
+
+  digitalWrite(temp_pin, 1); //Disable Device
+
+  if(error_tc)
+    return 2000;
+  else
+    return value/4;
+ Serial.println(value/4, DEC);
+#endif
+
 }
 
 
